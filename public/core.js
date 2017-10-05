@@ -1,0 +1,40 @@
+/**
+ * Created by kiroshan on 2017/10/03.
+ */
+var sTodo = angular.module('sTodo',[]);
+
+function mainController($scope, $http){
+    $scope.formData = {};
+
+    $http.get('/api/todos')
+        .success(function(data){
+            $scope.todos = data;
+            console.log(data);
+        })
+        .error(function(data){
+            console.log('Error: ' + data);
+        });
+    $scope.createTodo = function(){
+        $http.post('/api/todos', $scope.formData)
+            .success(function(data){
+                $scope.formData = {};
+                $scope.todos = data;
+                console.log(data);
+            })
+            .error(function(data){
+                console.log('Error: '+ data);
+            });
+    };
+
+    $scope.deleteTodo = function(id){
+        $http.delete('/api/todos/'+ id)
+            .success(function(data){
+                $scope.todos = data;
+                console.log(data);
+            })
+            .error(function(data){
+                console.log('Error: ' + data);
+            });
+    };
+
+}
