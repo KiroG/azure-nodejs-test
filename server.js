@@ -11,6 +11,7 @@
     var morgan = require('morgan');
     var bodyParser = require('body-parser');
     var methodOverride = require('method-override');
+    var port = process.env.PORT || 1337;
 
     // configuration
 
@@ -78,5 +79,5 @@
 
         });
 
-    app.listen(9000);
-    console.log("App listening on port 9000");
+    app.listen(port);
+    console.log(port);
